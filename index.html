@@ -67,7 +67,7 @@ for(var i = 0; i < 10; i++){
   var timeDay = "12:00 PM"; 
  }
   else {
-    var timeDay = (i + 9) - 12 + ":00 PM";  
+    var timeDay = " "+  (i + 9) - 12 + ":00 PM";  
  }
 
 
@@ -97,6 +97,8 @@ divs.append(textComment);
 divs.append(savebutton);                      
          
 }         
+ 
+
  
   
 // function on click
@@ -144,7 +146,7 @@ $(".notes").each(function(){
   }
 })
 
-}
+} 
 
 colorHour();
 
@@ -156,6 +158,8 @@ $("#13").val(localStorage.getItem(13));
 $("#14").val(localStorage.getItem(14));
 $("#15").val(localStorage.getItem(15));
 $("#16").val(localStorage.getItem(16));
+$("#17").val(localStorage.getItem(17));
+$("#18").val(localStorage.getItem(18));
 
 
 
