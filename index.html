@@ -58,11 +58,10 @@ divContainer.append(h1El);
 
 for(var i = 0; i < 10; i++){
 
-
 //Label for the time 
  if ( (i+9) < 12){
      var timeDay = i + 9 + ":00 AM";
-  
+ 
  }
  else if( (i+9) == 12 ){
   var timeDay = "12:00 PM"; 
@@ -71,8 +70,8 @@ for(var i = 0; i < 10; i++){
     var timeDay = (i + 9) - 12 + ":00 PM";  
  }
 
-//Creating all div with label,input and button
 
+//Creating all div with label,input and button
 var divs = $("<div>").addClass("row");
 var hourLabel = $("<label>");
 var textComment = $("<input>");
@@ -82,10 +81,13 @@ var savebutton = $("<button>");
   hourLabel.addClass("hour");
          
   textComment.attr("type","text");
+  textComment.attr("id", (i+9));
+  textComment.addClass("notes");
                     
                     
   savebutton.addClass("saveBtn imgBtn")
                    .text("SAVE");
+  savebutton.attr("id", (i+9));
          
 
 
@@ -99,55 +101,64 @@ divs.append(savebutton);
   
 // function on click
 
-savebutton.on("click", function(){
+$(document).on("click",".saveBtn", function(){
 
-    saveItemText = textComment.val();
-    hourItemText = hourLabel.text();
+    
+    saveItemText = $(this).siblings("input").val();
+    console.log("User Input: "+saveItemText);
+    hourItemText = $(this).attr("id");
 
 
     var temp = JSON.parse(localStorage.getItem("textComment")) || [];
+    
          var userData = {
              hourtime: hourItemText,
              texttime: saveItemText
          }
-         temp.push(userData);
-         localStorage.setItem("textComment", JSON.stringify(temp));
-         
-         for(var x=0;x<temp.length;x++){
-             //var li = document.createElement("li");
-             //li.textContent = temp[x].hourtime + " " +temp[x].saveItemText;
-             //document.getElementById("list-initials").appendChild(li);
-             var y = temp[x].hourtime + " " +temp[x].texttime;
-             console.log(y);
-         }
+         localStorage.setItem(userData.hourtime, userData.texttime);
     
 
-    alert ("aqui" + saveItemText + "a las" + hourItemText);
+   
 });
 
 
 // give color to Hour
 function colorHour(){
-  var hourColor = hourLabel.text();
 
- hourColor=moment(hourColor).format('LT');
+var cHour = moment().hours();
+console.log("cHour: "+cHour);
+$(".notes").each(function(){
+  var bHour = $(this).attr("id");
 
-  console.log("Aqui va la hora del calendario"  + hourColor);
-  
- var whatyn = moment(hourColor).isSame(hourToday);
-  console.log("Es la misma Hora" + whatyn);
-
-  var despues = moment(hourColor).isAfter(hourToday);
-  console.log( "Es despues de " + despues);
-
-  var antes = moment(hourColor).isBefore(hourToday);
-  console.log( "Es antes de " + antes);
-
-
+  if(parseInt(bHour)<cHour){
+    $(this).addClass("past");
+  }
+  else if(parseInt(bHour) === cHour){
+    $(this).removeClass("past");
+    $(this).addClass("present");
+  }
+  else{
+    $(this).removeClass("past");
+    $(this).removeClass("present");
+    $(this).addClass("future");
+  }
+})
 
 }
 
 colorHour();
+
+$("#9").val(localStorage.getItem(9));
+$("#10").val(localStorage.getItem(10));
+$("#11").val(localStorage.getItem(11));
+$("#12").val(localStorage.getItem(12));
+$("#13").val(localStorage.getItem(13));
+$("#14").val(localStorage.getItem(14));
+$("#15").val(localStorage.getItem(15));
+$("#16").val(localStorage.getItem(16));
+
+
+
 
 });
     </script>
