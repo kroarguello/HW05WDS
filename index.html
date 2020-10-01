@@ -19,7 +19,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js" integrity="sha512-Izh34nqeeR7/nwthfeE0SI3c8uhFSnqxV0sI9TvTcXiFJkMd6fB644O64BRq2P/LA/+7eRvCw4GmLsXksyTHBg==" crossorigin="anonymous"></script>
     <title>Work Day Scheduler</title>
   </head>
@@ -36,5 +35,77 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+
+$(document).ready(function(){
+
+ //Variables for create elements
+var hourLabel = $("<label>");
+var textComment = $("<input>");
+var savebutton = $("<button>");
+var divs = $("<div>");
+var divContainer = $(".container");
+
+
+var today = moment().format('LLL');
+var hourToday = moment().format('LT');
+
+
+
+// Print the Date and time of today 
+var h1El = $("<h1>");
+h1El.text(today);
+divContainer.append(h1El);
+
+
+
+//adding atributes, classes, etc
+hourLabel.addClass("hour");
+          //.text("numero");
+
+textComment.attr("type","text")
+           .addClass("past present future");
+
+
+savebutton.addClass("saveBtn imgBtn")
+          .text("SAVE");
+
+
+
+
+//hourLabel.text(timeDay);
+//$.each(timeDay,function(i,numero){
+ 
+ //divContainer.append("<div">" + numero + "</div>");
+//});
+
+// Creating each hour
+
+ for(var i = 0; i < 10; i++){
+
+  var divs = $("<div>")
+             .addClass("row");
+ 
+ var timeDay = moment(i).format('LT');            
+ divs.append(hourLabel.text(timeDay));
+ 
+  divs.append(textComment);
+               
+          
+
+  divs.append(savebutton);                      
+  divContainer.append(divs);          
+             
+ 
+ };
+  
+
+
+
+
+
+
+});
+    </script>
   </body>
 </html>
