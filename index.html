@@ -40,13 +40,8 @@
 
 $(document).ready(function(){
 
- //Variables for create elements
-var hourLabel = $("<label>");
-var textComment = $("<input>");
-var savebutton = $("<button>");
-//var divs = $("<div>");
+// getting variables 
 var divContainer = $(".container");
-
 
 var today = moment().format('LLL');
 var hourToday = moment().format('LT');
@@ -58,27 +53,6 @@ var h1El = $("<h1>");
 h1El.text(today);
 divContainer.append(h1El);
 
-
-
-//adding atributes, classes, etc
-//divs.addClass("row");
-
-hourLabel.addClass("hour");
-         
-textComment.attr("type","text");
-           
-           
-savebutton.addClass("saveBtn imgBtn")
-          .text("SAVE");
-
-
-
-
-//hourLabel.text(timeDay);
-//$.each(timeDay,function(i,numero){
- 
- //divContainer.append("<div">" + numero + "</div>");
-//});
 
 // Creating each hour
 
@@ -97,11 +71,24 @@ for(var i = 0; i < 10; i++){
     var timeDay = (i + 9) - 12 + ":00 PM";  
  }
 
-
-
 //Creating all div with label,input and button
 
 var divs = $("<div>").addClass("row");
+var hourLabel = $("<label>");
+var textComment = $("<input>");
+var savebutton = $("<button>");
+
+// Adding classes, Attibutes
+  hourLabel.addClass("hour");
+         
+  textComment.attr("type","text");
+                    
+                    
+  savebutton.addClass("saveBtn imgBtn")
+                   .text("SAVE");
+         
+
+
 divContainer.append(divs);                
 divs.append(hourLabel.text(timeDay));
 divs.append(textComment);
@@ -109,7 +96,6 @@ divs.append(savebutton);
          
 }         
  
-// };
   
 // function on click
 
