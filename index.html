@@ -35,7 +35,8 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script>
+
+<script>
 
 $(document).ready(function(){
 
@@ -43,7 +44,7 @@ $(document).ready(function(){
 var hourLabel = $("<label>");
 var textComment = $("<input>");
 var savebutton = $("<button>");
-var divs = $("<div>");
+//var divs = $("<div>");
 var divContainer = $(".container");
 
 
@@ -60,13 +61,13 @@ divContainer.append(h1El);
 
 
 //adding atributes, classes, etc
+//divs.addClass("row");
+
 hourLabel.addClass("hour");
-          //.text("numero");
-
-textComment.attr("type","text")
-           .addClass("past present future");
-
-
+         
+textComment.attr("type","text");
+           
+           
 savebutton.addClass("saveBtn imgBtn")
           .text("SAVE");
 
@@ -81,25 +82,62 @@ savebutton.addClass("saveBtn imgBtn")
 
 // Creating each hour
 
- for(var i = 0; i < 10; i++){
+for(var i = 0; i < 10; i++){
 
-  var divs = $("<div>")
-             .addClass("row");
- 
- var timeDay = moment(i).format('LT');            
- divs.append(hourLabel.text(timeDay));
- 
-  divs.append(textComment);
-               
-          
 
-  divs.append(savebutton);                      
-  divContainer.append(divs);          
-             
- 
- };
+//Label for the time 
+ if ( (i+9) < 12){
+     var timeDay = i + 9 + ":00 AM";
   
+ }
+ else if( (i+9) == 12 ){
+  var timeDay = "12:00 PM"; 
+ }
+  else {
+    var timeDay = (i + 9) - 12 + ":00 PM";  
+ }
 
+}
+
+//Creating all div with label,input and button
+
+var divs = $("<div>").addClass("row");
+divContainer.append(divs);                
+divs.append(hourLabel.text(timeDay));
+divs.append(textComment);
+divs.append(savebutton);                      
+         
+         
+ 
+// };
+  
+// function on click
+
+savebutton.on("click", function(){
+
+    saveItemText = textComment.val();
+    hourItemText = hourLabel.text();
+
+
+    var temp = JSON.parse(localStorage.getItem("textComment")) || [];
+         var userData = {
+             hourtime: hourItemText,
+             texttime: saveItemText
+         }
+         temp.push(userData);
+         localStorage.setItem("textComment", JSON.stringify(temp));
+         
+         for(var x=0;x<temp.length;x++){
+             //var li = document.createElement("li");
+             //li.textContent = temp[x].hourtime + " " +temp[x].saveItemText;
+             //document.getElementById("list-initials").appendChild(li);
+             var y = temp[x].hourtime + " " +temp[x].texttime;
+             console.log(y);
+         }
+    
+
+    alert ("aqui" + saveItemText + "a las" + hourItemText);
+});
 
 
 
