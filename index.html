@@ -97,7 +97,7 @@ for(var i = 0; i < 10; i++){
     var timeDay = (i + 9) - 12 + ":00 PM";  
  }
 
-}
+
 
 //Creating all div with label,input and button
 
@@ -107,7 +107,7 @@ divs.append(hourLabel.text(timeDay));
 divs.append(textComment);
 divs.append(savebutton);                      
          
-         
+}         
  
 // };
   
@@ -140,8 +140,28 @@ savebutton.on("click", function(){
 });
 
 
+// give color to Hour
+function colorHour(){
+  var hourColor = hourLabel.text();
+
+ hourColor=moment(hourColor).format('LT');
+
+  console.log("Aqui va la hora del calendario"  + hourColor);
+  
+ var whatyn = moment(hourColor).isSame(hourToday);
+  console.log("Es la misma Hora" + whatyn);
+
+  var despues = moment(hourColor).isAfter(hourToday);
+  console.log( "Es despues de " + despues);
+
+  var antes = moment(hourColor).isBefore(hourToday);
+  console.log( "Es antes de " + antes);
 
 
+
+}
+
+colorHour();
 
 });
     </script>
